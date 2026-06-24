@@ -1,8 +1,8 @@
 import yfinance as yf
 from textblob import TextBlob
-import feedparser # RSS feed processing ke liye
+import feedparser 
 
-# 1. Advanced Mapping: Expanded for high-accuracy triggers
+
 CROP_STOCK_CORRELATION = {
     "Agriculture": {
         "keywords": ["wheat", "rice", "monsoon", "farming", "drought", "rain", "harvest", "grain", "onion", "potato"],
@@ -31,9 +31,9 @@ CROP_STOCK_CORRELATION = {
     }
 }
 
-# 2. Hybrid News Fetcher: RSS + Manual cleaning
+
 def fetch_live_trade_news():
-    # RSS feeds are much more stable than direct HTML scraping
+    
     rss_urls = [
         'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15839061', # CNBC Commodities
         'http://feeds.feedburner.com/reuters/businessNews', # Reuters Business
@@ -54,7 +54,7 @@ def fetch_live_trade_news():
             
     return headlines[:5] if headlines else ["Market data stable. Please enter news manually."]
 
-# 3. Decision Logic: Trade Signals based on Sentiment
+
 def get_trade_advice(sentiment, score, sector):
     if score > 15: 
         return {
@@ -75,7 +75,7 @@ def get_trade_advice(sentiment, score, sector):
             "msg": f"Neutral impact for {sector}. Wait for a clear breakout or news trigger."
         }
 
-# 4. Main AI Engine
+
 def analyze_impact(headline):
     blob = TextBlob(headline)
     sentiment = blob.sentiment.polarity
