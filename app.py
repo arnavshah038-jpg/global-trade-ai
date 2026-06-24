@@ -3,10 +3,10 @@ import yfinance as yf
 import pandas as pd
 from engine import analyze_impact, fetch_live_trade_news
 
-# 1. Page Configuration
+
 st.set_page_config(page_title="AI Trade Intel Engine", layout="wide", initial_sidebar_state="expanded")
 
-# Custom CSS for Professional Dark Theme
+
 st.markdown("""
     <style>
     .main { background-color: #0e1117; }
@@ -15,34 +15,34 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-st.title("🌍 Global Trade & Geopolitical AI Analyzer")
-st.markdown("---")
+st.title(" Global Trade & Geopolitical AI Analyzer")
+st.markdown("-")
 
-# --- SIDEBAR: LIVE NEWS FETCHING ---
-st.sidebar.header("📡 Live Market Intelligence")
+
+st.sidebar.header(" Live Market Intelligence")
 st.sidebar.info("Scrape real-time global trade news from Reuters.")
 
 if st.sidebar.button("Fetch Latest News"):
     with st.sidebar:
         with st.spinner('Scraping news...'):
             news_list = fetch_live_trade_news()
-            st.write("### Latest Headlines")
+            st.write(" Latest Headlines")
             for n in news_list:
                 st.write(f"🔹 {n}")
-                st.markdown("---")
+                st.markdown("-")
 
-# --- MAIN UI: ANALYSIS SECTION ---
+
 st.subheader("🔍 News Impact Analysis")
 headline = st.text_input("Enter News Headline or Agriculture Update:", 
                          placeholder="e.g., Massive wheat shortage in Punjab due to unseasonal rain...")
 
 if st.button("Run Deep AI Analysis"):
     if headline:
-        # Engine call - Ab ye updated data (advice) ke saath aayega
+        
         result = analyze_impact(headline)
         advice = result['advice']
         
-        # 2. Decision Support Alert Box (High Visibility)
+       
         alert_color = "red" if advice['intensity'] == "CRITICAL" else "green" if advice['intensity'] == "HIGH" else "#FFA500"
         
         st.markdown(f"""
@@ -52,7 +52,7 @@ if st.button("Run Deep AI Analysis"):
             </div>
         """, unsafe_allow_html=True)
 
-        # 3. Metrics Row
+        
         m1, m2, m3 = st.columns(3)
         m1.metric("Detected Sector", result['sector'])
         
@@ -64,27 +64,27 @@ if st.button("Run Deep AI Analysis"):
         primary_ticker = result['stocks'][0]
         m3.metric("Primary Ticker", primary_ticker)
 
-        st.markdown("---")
+        st.markdown("-")
         
         # 4. Details & Chart Row
         col1, col2 = st.columns([1, 2])
         
         with col1:
-            st.subheader("📋 Analysis Report")
+            st.subheader("Analysis Report")
             st.write(f"**Source Context:** {headline}")
             
-            st.write("### 🚀 Sector Stocks to Watch:")
+            st.write(" Sector Stocks to Watch:")
             for stock in result['stocks']:
-                # Adding a small link to Yahoo Finance for each stock
-                st.markdown(f"- **[{stock}](https://finance.yahoo.com/quote/{stock})**")
+                
+                st.markdown(f"- [{stock}](https://finance.yahoo.com/quote/{stock})")
             
             with st.expander("See Methodology"):
                 st.write("Using TextBlob NLP for Sentiment and Custom Keyword Mapping for Sector Correlation.")
         
         with col2:
-            st.subheader(f"📈 Market Trend: {primary_ticker}")
+            st.subheader(f"Market Trend: {primary_ticker}")
             try:
-                # Fetching 1 month data for the primary stock
+                
                 ticker_obj = yf.Ticker(primary_ticker)
                 hist = ticker_obj.history(period="1mo")
                 
@@ -99,5 +99,5 @@ if st.button("Run Deep AI Analysis"):
         st.warning("Please enter a headline first!")
 
 # Footer logic
-st.markdown("---")
+st.markdown("-")
 st.caption("AI Model: TextBlob NLP Engine | Data Source: Yahoo Finance & Reuters Commodities News")
