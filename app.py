@@ -60,13 +60,13 @@ if st.button("Run Deep AI Analysis"):
         status = "Bullish" if sentiment_val > 0.05 else "Bearish" if sentiment_val < -0.05 else "Neutral"
         m2.metric("Market Sentiment", status, f"{result['score']}%")
         
-        # Picking the main stock for the ticker display
+        
         primary_ticker = result['stocks'][0]
         m3.metric("Primary Ticker", primary_ticker)
 
         st.markdown("-")
         
-        # 4. Details & Chart Row
+       
         col1, col2 = st.columns([1, 2])
         
         with col1:
@@ -98,6 +98,6 @@ if st.button("Run Deep AI Analysis"):
     else:
         st.warning("Please enter a headline first!")
 
-# Footer logic
+
 st.markdown("-")
 st.caption("AI Model: TextBlob NLP Engine | Data Source: Yahoo Finance & Reuters Commodities News")
