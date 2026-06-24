@@ -35,9 +35,9 @@ CROP_STOCK_CORRELATION = {
 def fetch_live_trade_news():
     
     rss_urls = [
-        'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15839061', # CNBC Commodities
-        'http://feeds.feedburner.com/reuters/businessNews', # Reuters Business
-        'https://economictimes.indiatimes.com/markets/commodities/rssfeeds/1808151.cms' # ET Commodities
+        'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=15839061', 
+        'http://feeds.feedburner.com/reuters/businessNews', 
+        'https://economictimes.indiatimes.com/markets/commodities/rssfeeds/1808151.cms' 
     ]
     
     headlines = []
